@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController()
@@ -51,6 +52,14 @@ public class Controlador1 {
         }
     }
 
+    @PostMapping("/controlador1/addpersona")
+    public String personaAdd(@RequestBody Persona persona){
+        PersonaService p = new PersonaServiceImp();
+        p.setNombre(persona.getNombre());
+        p.setEdad(persona.getEdad());
+        p.setCiudad(persona.getCiudad());
+        return p.toString()+ " añadida";
+    }
     @GetMapping("/controlador1/addpersona2")
     public String getPersona2(@RequestHeader String nombre, @RequestHeader String ciudad, @RequestHeader String edad){
         personaService.setNombre(nombre);
@@ -58,5 +67,11 @@ public class Controlador1 {
         personaService.setCiudad(ciudad);
         return personaService.toString();
     }
+
+    @GetMapping("/controlador1/getciudad")
+    public List<CiudadService> getCiudades(){
+        return ciudades;
+    }
+
 
 }
